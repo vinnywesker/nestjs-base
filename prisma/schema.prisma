@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  name      String
+  password  String
+  phone     String?
+  cpf       String    @unique
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+
+  @@index([id], name: "id")
+  @@map("VSR_USER")
+}
+
+model Product {
+  id        Int       @id @default(autoincrement())
+  name      String
+  label     String
+  brand     String
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+
+  @@index([id], name: "id")
+  @@map("VSR_PRODUCT")
+}
